@@ -17,6 +17,7 @@ import ListQuiz from "./components/User/ListQuiz";
 import DetailQuiz from "./components/User/DetailQuiz";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import ManageQuiz from "./components/Admin/Content/Quiz/ManageQuiz";
+import Questions from "./components/Admin/Content/Question/Questions";
 
 const NotFound = () => {
     const navigate = useNavigate();
@@ -46,6 +47,7 @@ const Layout = (props) => {
                     <Route index element={<DashBoard />} />
                     <Route path="manage-users" element={<ManageUser />} />
                     <Route path="manage-quizzes" element={<ManageQuiz />} />
+                    <Route path="manage-questions" element={<Questions />} />
                 </Route>
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />

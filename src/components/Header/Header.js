@@ -18,6 +18,7 @@ const Header = () => {
         navigate('/signup');
     }
 
+
     return (
         <Navbar bg="light" expand="lg">
             <Container>
@@ -32,16 +33,16 @@ const Header = () => {
                     </Nav>
                     <Nav>
                         {isAuthenticated === false ?
-                        <>
+                        <> 
                             <button className='btn-login' onClick={() => handleLogin()}>Log in</button>
                             <button className='btn-signup' onClick={() => handleSignup()}>Sign up</button>
-                        </>
-                        :
+                         </>
+                        : 
                             <NavDropdown title="Setting" id="basic-nav-dropdown">
-                                <NavDropdown.Item >Log out</NavDropdown.Item>
+                                <NavDropdown.Item>Log out</NavDropdown.Item>
                                 <NavDropdown.Item >Profile</NavDropdown.Item>
                             </NavDropdown>
-                        } 
+                         }  
                     </Nav>
                 </Navbar.Collapse>
             </Container>

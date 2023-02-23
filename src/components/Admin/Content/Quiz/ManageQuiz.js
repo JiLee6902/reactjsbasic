@@ -1,10 +1,13 @@
 import './ManageQuiz.scss';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 import { FcPlus } from 'react-icons/fc';
 import { toast } from 'react-toastify';
-import { postCreateNewQuiz } from '../../../../services/apiServices';
+import { postCreateNewQuiz, getAllQuizForAdmin } from '../../../../services/apiServices';
 import TableQuiz from './TableQuiz';
+import Accordion from 'react-bootstrap/Accordion';
+import ModalUpdateQuiz from "./ModalUpdateQuiz";
+import ModalDeleteQuiz from "./ModalDeleteQuiz";
 
 const options = [
     { value: 'EASY', label: 'EASY' },
@@ -14,12 +17,28 @@ const options = [
 
 const ManageQuiz = (props) => {
 
+    const [showModalUpdateQuiz, setShowModalUpdateQuiz] = useState(false);
+    const [showModalDeleteQuiz, setShowModalDeleteQuiz] = useState(false);
+    const [dataUpdate, setDataUpdate] = useState({});
+
     const [previewImage, setPreviewImage] = useState("");
     const [image, setImage] = useState("");
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [type, setType] = useState('');
+    const [listQuizs, setListQuizs] = useState([]);
+    const [dataDelete, setDataDelete] = useState({});
 
+    useEffect(() => {
+        fetchListQuizs();
+    }, []);
+
+    const fetchListQuizs = async () => {
+        let res = await getAllQuizForAdmin();
+        if (res && res.EC === 0) {
+            setListQuizs(res.DT);
+        }
+    }
 
     const handleUploadImage = (event) => {
         if (event.target && event.target.files && event.target.files[0]) {
@@ -31,6 +50,19 @@ const ManageQuiz = (props) => {
         }
     }
 
+    const handleClickBtnUpdateQuiz = (quiz) => {
+        setShowModalUpdateQuiz(true);
+        setDataUpdate(quiz);
+    }
+
+    const handleClickBtnDeleteQuiz = (quiz) => {
+        setShowModalDeleteQuiz(true);
+        setDataDelete(quiz);
+    }
+
+    const resetUpdateData = () => {
+        setDataUpdate({});
+    }
 
     const handleSubmitQuiz = async () => {
         //vlaidate
@@ -45,17 +77,20 @@ const ManageQuiz = (props) => {
             setDescription('');
             setType('');
             setPreviewImage('');
+            await fetchListQuizs();
         } else {
             toast.error(res.EM)
         }
     }
+
+
     return (
         <div className="quiz-container">
-            <div className="title">
-                Manage Quizzes
-            </div>
-            <hr />
-            <div className="add-new">
+             <Accordion defaultActiveKey="0">
+      <Accordion.Item eventKey="0">
+        <Accordion.Header>Manage Quizzes</Accordion.Header>
+        <Accordion.Body>
+        <div className="add-new">
                 <fieldset className="border rounded-3 p-3">
                     <legend className="float-none w-auto px-3">Add new Quiz</legend>
                     <div className="form-floating mb-3">
@@ -113,8 +148,30 @@ const ManageQuiz = (props) => {
                     </div>
                 </fieldset>
             </div>
+        </Accordion.Body>
+      </Accordion.Item>
+    </Accordion>
+
             <div className="list-detail">
-                <TableQuiz />
+                <TableQuiz 
+                listQuizs = {listQuizs}
+                fetchListQuizs = {fetchListQuizs}
+                handleClickBtnDeleteQuiz = {handleClickBtnDeleteQuiz}
+                handleClickBtnUpdateQuiz = {handleClickBtnUpdateQuiz}
+                />
+                <ModalUpdateQuiz
+                show={showModalUpdateQuiz}
+                setShow={setShowModalUpdateQuiz}
+                dataUpdate={dataUpdate}
+                fetchListQuizs={fetchListQuizs}
+                resetUpdateData={resetUpdateData}
+                />
+                <ModalDeleteQuiz
+                    show={showModalDeleteQuiz}
+                    setShow={setShowModalDeleteQuiz}
+                    dataDelete={dataDelete}
+                    fetchListQuizs={fetchListQuizs}
+                />
             </div>
         </div>
     )

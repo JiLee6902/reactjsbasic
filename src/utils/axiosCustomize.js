@@ -40,3 +40,5 @@ instance.interceptors.response.use(function (response) {
 });
 
 export default instance;
+
+//interceptors : can thiep vao response va request

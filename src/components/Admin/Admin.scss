@@ -1,21 +1,17 @@
-.admin-container{
+.admin-container {
     display: flex;
-
     .admin-sidebar {
-      .pro-sidebar {
-        height : 100vh !important;
-      }
+        .pro-sidebar {
+            height: 100vh !important;
+        }
     }
-
     .admin-content {
-      width: 100%;
-      .admin-header {
-        height: 40px;
-       
-      }
-
-      .admin-main {
-        
-      }
+        width: 100%;
+        .admin-header {
+            height: 40px;
+        }
+        .admin-main {
+            height: calc(100vh - 50px);
+        }
     }
 }

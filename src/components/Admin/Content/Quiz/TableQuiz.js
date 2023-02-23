@@ -3,21 +3,12 @@ import { getAllQuizForAdmin } from "../../../../services/apiServices";
 
 const TableQuiz = (props) => {
 
-    const [listQuiz, setListQuiz] = useState([]);
-
-    useEffect(() => {
-        fetchQuiz();
-    }, []);
-
-    const fetchQuiz = async () => {
-        let res = await getAllQuizForAdmin();
-        if (res && res.EC === 0) {
-            setListQuiz(res.DT);
-        }
-    }
+    const { listQuizs } = props;
 
     return (
-        <table className="table table-hover table-bordered">
+        <>
+        <div>List Quizzes: </div>
+        <table className="table table-hover table-bordered my-2">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
@@ -28,22 +19,22 @@ const TableQuiz = (props) => {
                 </tr>
             </thead>
             <tbody>
-                {listQuiz && listQuiz.map((item, index) => {
+                {listQuizs && listQuizs.map((item, index) => {
                     return (
                         <tr key={`table-quiz-${index}`}>
                             <th>{item.id}</th>
                             <td>{item.name}</td>
                             <td>{item.description}</td>
                             <td>{item.difficulty}</td>
-                            <td>
+                            <td style={{display: "flex", gap: "8px"}}>
                                 <button
                                     className='btn btn-warning mx-3'
-                                    onClick={() => props.handleClickBtnUpdate(item)}
+                                    onClick={() => props.handleClickBtnUpdateQuiz(item)}
                                 >
                                     Edit</button>
                                 <button
                                     className='btn btn-danger'
-                                    onClick={() => props.handleClickBtnDelete(item)}
+                                    onClick={() => props.handleClickBtnDeleteQuiz(item)}
                                 >
                                     Delete</button>
                             </td>
@@ -52,6 +43,7 @@ const TableQuiz = (props) => {
                 })}
             </tbody>
         </table>
+        </>
     )
 }
 

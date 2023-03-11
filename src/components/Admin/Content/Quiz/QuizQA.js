@@ -1,6 +1,6 @@
 import Select from "react-select";
 import { useEffect, useState } from "react";
-import "./Questions.scss";
+import "./QuizQA.scss";
 import { FcPlus } from "react-icons/fc";
 import { TbHeartPlus } from "react-icons/tb";
 import { BsPatchMinusFill } from "react-icons/bs";
@@ -13,15 +13,15 @@ import "react-awesome-lightbox/build/style.css";
 import Lightbox from "react-awesome-lightbox";
 import {
   getAllQuizForAdmin,
+  postUpsertQA,
+  getQuizWithQA,
   postCreateNewQuestionForQuiz,
   postCreateNewAnswerForQuestion,
 } from "../../../../services/apiServices";
 import { toast } from "react-toastify";
 import { useTranslation, Trans } from "react-i18next";
 
-const Questions = (props) => {
-  const { t } = useTranslation();
-  const [selectedQuiz, setSelectedQuiz] = useState({});
+const QuizQA = (props) => {
   const initQuestions = [
     {
       id: uuidv4(),
@@ -40,6 +40,7 @@ const Questions = (props) => {
     },
   ];
   const [questions, setQuestions] = useState(initQuestions);
+  const { t } = useTranslation();
 
   const [isPreviewImage, setIsPreviewImage] = useState(false);
   const [dataImagePreview, setDataImagePreview] = useState({
@@ -47,11 +48,50 @@ const Questions = (props) => {
     url: "",
   });
 
+  const [selectedQuiz, setSelectedQuiz] = useState({});
   const [listQuiz, setListQuiz] = useState([]);
 
   useEffect(() => {
     fetchListQuizs();
   }, []);
+
+  useEffect(() => {
+    if (selectedQuiz && selectedQuiz.value) {
+      fetchQuizWithQA();
+    }
+  }, [selectedQuiz]);
+
+  function urltoFile(url, filename, mimeType) {
+    return fetch(url)
+      .then(function (res) {
+        return res.arrayBuffer();
+      })
+      .then(function (buf) {
+        return new File([buf], filename, { type: mimeType });
+      });
+  }
+
+  const fetchQuizWithQA = async () => {
+    let res = await getQuizWithQA(selectedQuiz.value);
+    if (res && res.EC === 0) {
+      //convert base64 to file object
+      let newQA = [];
+      for (let i = 0; i < res.DT.qa.length; i++) {
+        let q = res.DT.qa[i];
+        if (q.imageFile) {
+          q.imageName = `Question-${q.id}.png`;
+          q.imageFile = await urltoFile(
+            `data:/image/png;base64,${q.imageFile}`,
+            `Question-${q.id}.png`,
+            "image/png"
+          );
+        }
+        newQA.push(q);
+      }
+
+      setQuestions(newQA);
+    }
+  };
 
   const fetchListQuizs = async () => {
     let res = await getAllQuizForAdmin();
@@ -174,6 +214,14 @@ const Questions = (props) => {
     }
   };
 
+  const toBase64 = (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+
   const handleSubmitQuestionForQuiz = async () => {
     //promist all sẽ chạy theo trình tự song song, chay nhanh nhat va không theo thứ tự trước sau
     //submit question
@@ -219,7 +267,6 @@ const Questions = (props) => {
         !questions[i].answers[indexA].description
       ) {
         questions[i].answers[indexA].isValidAnswerClass = false;
-        setQuestions(questions);
         break;
       }
     }
@@ -245,37 +292,35 @@ const Questions = (props) => {
       toast.error(`Not empty description for Question ${indexQ1 + 1}`);
       return;
     }
-
-    for (const question of questions) {
-      const q = await postCreateNewQuestionForQuiz(
-        +selectedQuiz.value,
-        question.description,
-        question.imageFile
-      );
-
-      for (const answer of question.answers) {
-        await postCreateNewAnswerForQuestion(
-          answer.description,
-          answer.isCorrect,
-          q.DT.id
+    let questionsClone = _.cloneDeep(questions);
+    for (let i = 0; i < questionsClone.length; i++) {
+      if (questionsClone[i].imageFile) {
+        questionsClone[i].imageFile = await toBase64(
+          questionsClone[i].imageFile
         );
       }
     }
-    toast.success("Create questions and answers succed!");
-    setQuestions(initQuestions);
+
+    let res = await postUpsertQA({
+      quizId: selectedQuiz.value,
+      questions: questionsClone,
+    });
+
+    if (res && res.EC === 0) {
+      toast.success(res.EM);
+      fetchQuizWithQA();
+    }
   };
+  console.log("check question: ", questions);
 
   return (
     <div className="questions-container">
-      <div className="title">{t("admin.managementquestion.mqqtitle")}</div>
-      <hr />
       <div className="add-new-question">
         <div className="col-6 form-group">
           <label className="mb-2">
             {" "}
             {t("admin.managementquiz.mqupdate.mquselect")}
           </label>
-
           <Select
             defaultValue={selectedQuiz}
             onChange={setSelectedQuiz}
@@ -312,8 +357,7 @@ const Questions = (props) => {
                       }
                     />
                     <label>
-                      {" "}
-                      {t("admin.managementquiz.mqupdate.mqudesone")} {index + 1}{" "}
+                      {t("admin.managementquiz.mqupdate.mqudesone")} {index + 1}
                       {t("admin.managementquiz.mqupdate.mqudestwo")}
                     </label>
                   </div>
@@ -396,7 +440,7 @@ const Questions = (props) => {
                             }
                           />
                           <label>
-                            {t("admin.managementquiz.mqupdate.mquans")}{" "}
+                            {t("admin.managementquiz.mqupdate.mquans")}
                             {index + 1}
                           </label>
                         </div>
@@ -451,4 +495,4 @@ const Questions = (props) => {
   );
 };
 
-export default Questions;
+export default QuizQA;

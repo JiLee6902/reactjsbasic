@@ -1,6 +1,7 @@
 import axios from 'axios'
 import NProgress from 'nprogress'
 import { store } from '../redux/store';
+import { refreshToken } from '../services/apiServices';
 
 NProgress.configure({
     showSpinner: false,
@@ -34,7 +35,12 @@ instance.interceptors.response.use(function (response) {
     NProgress.done();
     return response && response.data ? response.data : response;
 }, function (error) {
-    NProgress.done();
+NProgress.done();
+    //token expired: EC === -999
+    if(error.response.data && error.response.data.EC === -999) {
+      
+    }
+
     return error && error.response && error.response.data
         ? error.response.data : Promise.reject(error);
 });

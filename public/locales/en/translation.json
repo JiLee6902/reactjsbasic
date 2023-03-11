@@ -1,0 +1,117 @@
+{
+  "homepage": {
+    "title1": "There's a better way to ask",
+    "title2": "You don't want to make a boring form. And your audience won't answer one. Create a typeform instead -- and make everyone happy.",
+    "title3": {
+      "login": "Get's started. It's free"
+    },
+    "title4": {
+      "start": "Doing Quiz Now"
+    }
+  },
+
+  "header": {
+    "system": "JI LEE's SYSTEM",
+    "submenu": {
+      "subhome": "Home",
+      "subuser": "User",
+      "subadmin": "Admin",
+      "sublogin": "Log In",
+      "subsignup": "Sign Up",
+      "quiz": "Quiz",
+      "subprofile": "Profile",
+      "sublogout": "Log Out",
+      "subtitle": "Setting"
+    }
+  },
+
+  "admin": {
+    "sidebar": {
+      "adminitem": "Dashboard",
+      "manageuser": "Management Users",
+      "managequiz": "Management Quiz",
+      "manageques": "Management Questions",
+      "feature": "Feature"
+    },
+    "dashboard": {
+      "dbtitle": "Analytics Dashboard",
+      "totaluser": "Total Users",
+      "totalquiz": "Total Quizs",
+      "totalques": "Total Questions",
+      "totalans": "Total Answers"
+    },
+    "datachart": {
+      "chartquiz": "Quizzes",
+      "chartques": "Questions",
+      "chartans": "Answers"
+    },
+    "managementuser": {
+      "mutitle": "Manage User",
+      "muadd": "Add New User"
+    },
+    "managementquiz": {
+      "mqmq": {
+        "mqtitle": "Manage Quizzes",
+        "mqadd": "Add New Quiz",
+        "mqname": "Name",
+        "mqdescription": "Description",
+        "mqfile": "Upload File Image",
+        "mqpreview": "Preview Image",
+        "mqsave": "Save",
+        "mqlist": {
+          "mqlisttitle": "List Quizzes:",
+          "mqlistname": "Name",
+          "mqlistdes": "Description",
+          "mqlisttype": "Type",
+          "mqlistaction": "Action",
+          "mqlistedit": "Edit",
+          "mqlistdelete": "Delete"
+        }
+      },
+      "mqupdate": {
+        "mqutitle": "Update Q/A Quizzes",
+        "mquselect": "Select Quiz:",
+        "mquadd": "Add questions:",
+        "mqudesone": "Question",
+        "mqudestwo": "'s description",
+        "mqufile": "No file is uploaded.",
+        "mquans": "Answers",
+        "mqusave": "Save Questions"
+      },
+      "mqassign": {
+        "mqatitle": "Assign to user",
+        "mqaselectquiz": "Select Quiz:",
+        "mqaselectuser": "Select User:",
+        "mqasave": "Assign"
+      }
+    },
+    "managementquestion": {
+      "mqqtitle": "Manage Questions"
+    }
+  },
+  "auth": {
+    "login": {
+      "loginlogin": "Sign Up",
+      "loginaccount": "Don't have an account yet?",
+      "logintitle": "Ji Lee's system",
+      "loginhello": "Hello, who's this?",
+      "logingmail": "Email",
+      "loginpassword": "Password",
+      "loginforgot": "Forgot password?",
+      "loginbutton": "Login to Ji Lee's system",
+      "loginor": "OR",
+      "loginface": "Log in with Facebook",
+      "logingoogle": "Log in with Google",
+      "loginsso": "Log in with SSO",
+      "loginhomepage": "Go to HomePage"
+    },
+    "signup": {
+      "signupsignup": "Login",
+      "signupaccount": "Already have an account?",
+      "signuptitle": "Ji Lee's system",
+      "signupstart": "Start your journey?",
+      "signupusername": "Username",
+      "signupbutton": "Create my free account"
+    }
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "homepage": {
+    "title1": "Có một cách tốt hơn để hỏi",
+    "title2": "Bạn không muốn làm một hình thức nhàm chán. Và khán giả của bạn sẽ không trả lời một. Thay vào đó, hãy tạo một kiểu chữ -- và làm cho mọi người hài lòng.",
+    "title3": {
+      "login": "Hãy bắt đầu. Nó miễn phí"
+    },
+    "title4": {
+      "start": "Bắt đầu làm thôi nào"
+    }
+  },
+  "header": {
+    "system": "Hệ thống của Ji Lee",
+    "submenu": {
+      "subhome": "Trang chủ",
+      "subuser": "Người dùng",
+      "subadmin": "Quản trị viên",
+      "sublogin": "Đăng nhập",
+      "subsignup": "Đăng ký",
+      "quiz": "Bộ Quiz",
+      "subprofile": "Thông tin cá nhân",
+      "sublogout": "Đăng xuất",
+      "subtitle": "Cài đặt"
+    }
+  },
+  "admin": {
+    "sidebar": {
+      "adminitem": "Bảng điều khiển",
+      "manageuser": "Quản lý người dùng",
+      "managequiz": "Quản lý bộ quiz",
+      "manageques": "Quản lý câu hỏi",
+      "feature": "Tính năng"
+    },
+    "dashboard": {
+      "dbtitle": "Thống kê",
+      "totaluser": "Tổng số người dùng",
+      "totalquiz": "Tổng số bộ Quiz",
+      "totalques": "Tổng số câu hỏi",
+      "totalans": "Tổng số câu trả lời"
+    },
+    "managementuser": {
+      "mutitle": "Quản lý người dùng",
+      "muadd": "Thêm mới người dùng"
+    },
+    "managementquiz": {
+      "mqmq": {
+        "mqtitle": "Quản lý Quizzes",
+        "mqadd": "Thêm mới Quiz",
+        "mqname": "Tên",
+        "mqdescription": "Mô tả",
+        "mqfile": "Tải ảnh lên",
+        "mqpreview": "Xem trước hình ảnh",
+        "mqsave": "Lưu",
+        "mqlist": {
+          "mqlisttitle": "Danh sách Quizzes:",
+          "mqlistname": "Tên",
+          "mqlistdes": "Mô tả",
+          "mqlisttype": "Kiểu",
+          "mqlistaction": "Hành động",
+          "mqlistedit": "Chỉnh sửa",
+          "mqlistdelete": "Xóa"
+        }
+      },
+      "mqupdate": {
+        "mqutitle": "Cập nhập Q/A Quizzes",
+        "mquselect": "Lựa chọn Quiz:",
+        "mquadd": "Thêm mới câu hỏi:",
+        "mqudesone": "Câu hỏi",
+        "mqudestwo": "'s mô tả",
+        "mqufile": "Không có tệp nào được tải lên.",
+        "mquans": "Câu trả lời",
+        "mqusave": "Lưu câu hỏi"
+      },
+      "mqassign": {
+        "mqatitle": "Chỉ định cho người dùng",
+        "mqaselectquiz": "Lựa chọn Quiz:",
+        "mqaselectuser": "Lựa chọn User:",
+        "mqasave": "Chỉ định"
+      }
+    },
+    "managementquestion": {
+      "mqqtitle": "Quản lý các câu hỏi"
+    }
+  },
+  "auth": {
+    "login": {
+      "loginlogin": "Đăng ký",
+      "loginaccount": "Chưa có tài khoản trước đó ?",
+      "logintitle": "Hệ thống của Ji Lee",
+      "loginhello": "Xin chào, bạn là ai thế?",
+      "logingmail": "Email",
+      "loginpassword": "Mật khẩu",
+      "loginforgot": "Bạn quên mật khẩu?",
+      "loginbutton": "Đăng nhập vào hệ thống",
+      "loginor": "Hoặc",
+      "loginface": "Đăng nhập với Facebook",
+      "logingoogle": "Đăng nhập với Google",
+      "loginsso": "Đăng nhập với SSO",
+      "loginhomepage": "Trở về trang chủ"
+    },
+    "signup": {
+      "signupsignup": "Đăng nhập",
+      "signupaccount": "Bạn đã có tài khoản?",
+      "signuptitle": "Hệ thống của Ji Lee",
+      "signupstart": "Bắt đầu cuộc hành trình chứ?",
+      "signupusername": "Biệt danh",
+      "signupbutton": "Tạo tài khoản miễn phí"
+    }
+  }
+}

@@ -5,7 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 
-
+//redux persist lưu data redux vào local storage
 
 const persistConfig = {
     key: 'root',

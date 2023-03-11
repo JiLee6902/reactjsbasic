@@ -14,9 +14,11 @@ import { FaTachometerAlt, FaGem, FaList, FaGithub, FaRegLaughWink, FaHeart } fro
 import sidebarBg from '../../assets/bg2.png';
 import './SideBar.scss';
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation, Trans } from 'react-i18next';
 
 const SideBar = (props) => {
     const navigate = useNavigate();
+    const {t} = useTranslation();
     const { image, collapsed, toggled, handleToggleSidebar } = props;
     return (
         <>
@@ -40,7 +42,7 @@ const SideBar = (props) => {
                             whiteSpace: 'nowrap',
                         }}
                     >
-                        <DiReact size={'3em'} color={"00bfff"} />
+                        {/* <DiReact size={'3em'} color={"00bfff"} /> */}
                         <span className="tiltle-name" onClick={() => navigate('/')}>
                             Le Quynh Chi
                         </span>
@@ -53,7 +55,7 @@ const SideBar = (props) => {
                             icon={<MdDashboard />}
                         //suffix={<span className="badge red">New</span>}
                         >
-                            <Link to="/admins">Dashboard</Link>
+                            <Link to="/admins">{t('admin.sidebar.adminitem')}</Link>
                         </MenuItem>
                         {/* <MenuItem icon={<FaGem />}> components </MenuItem> */}
                     </Menu>
@@ -62,15 +64,15 @@ const SideBar = (props) => {
                             // suffix={<span className="badge yellow">3</span>}
                             // icon={<FaRegLaughWink />}
                             icon={<FaGem />}
-                            title="Features"
+                            title={t('admin.sidebar.feature')}
                         >
-                            <MenuItem> Management Users
+                            <MenuItem> {t('admin.sidebar.manageuser')}
                                 <Link to="/admins/manage-users" />
                             </MenuItem>
-                            <MenuItem> Management Quiz
+                            <MenuItem>{t('admin.sidebar.managequiz')}
                                 <Link to="/admins/manage-quizzes" />
                             </MenuItem>
-                            <MenuItem> Management Questions
+                            <MenuItem>{t('admin.sidebar.manageques')}
                                 <Link to="/admins/manage-questions" />
                             </MenuItem>
                         </SubMenu>

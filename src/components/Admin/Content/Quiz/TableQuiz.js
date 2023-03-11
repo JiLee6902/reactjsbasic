@@ -1,21 +1,24 @@
 import { useState, useEffect } from "react";
 import { getAllQuizForAdmin } from "../../../../services/apiServices";
+import { useTranslation, Trans } from "react-i18next";
+
 
 const TableQuiz = (props) => {
 
     const { listQuizs } = props;
+    const { t } = useTranslation();
 
     return (
         <>
-        <div>List Quizzes: </div>
+        <div>{t("admin.managementquiz.mqmq.mqlist.mqlisttitle")}</div>
         <table className="table table-hover table-bordered my-2">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Action</th>
+                    <th scope="col">{t("admin.managementquiz.mqmq.mqlist.mqlistname")}</th>
+                    <th scope="col">{t("admin.managementquiz.mqmq.mqlist.mqlistdes")}</th>
+                    <th scope="col">{t("admin.managementquiz.mqmq.mqlist.mqlisttype")}</th>
+                    <th scope="col">{t("admin.managementquiz.mqmq.mqlist.mqlistaction")}</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,12 +34,12 @@ const TableQuiz = (props) => {
                                     className='btn btn-warning mx-3'
                                     onClick={() => props.handleClickBtnUpdateQuiz(item)}
                                 >
-                                    Edit</button>
+                                    {t("admin.managementquiz.mqmq.mqlist.mqlistedit")}</button>
                                 <button
                                     className='btn btn-danger'
                                     onClick={() => props.handleClickBtnDeleteQuiz(item)}
                                 >
-                                    Delete</button>
+                                    {t("admin.managementquiz.mqmq.mqlist.mqlistdelete")}</button>
                             </td>
                         </tr>
                     )

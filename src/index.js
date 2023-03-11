@@ -14,6 +14,8 @@ import 'nprogress/nprogress.css';
 import "react-awesome-lightbox/build/style.css";
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import { PersistGate } from 'redux-persist/integration/react';
+import i18n from './utils/i18n';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

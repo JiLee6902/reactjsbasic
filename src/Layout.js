@@ -18,6 +18,9 @@ import DetailQuiz from "./components/User/DetailQuiz";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import ManageQuiz from "./components/Admin/Content/Quiz/ManageQuiz";
 import Questions from "./components/Admin/Content/Question/Questions";
+import PrivateRoute from "./routes/PrivateRoute";
+import React, {Suspense} from 'react';
+
 
 const NotFound = () => {
     const navigate = useNavigate();
@@ -36,14 +39,23 @@ const NotFound = () => {
 }
 const Layout = (props) => {
     return (
-        <>
+        <Suspense fallback={<div>Loading...</div>}>
             <Routes>
                 <Route path="/" element={<App />}>
                     <Route index element={<HomePage />} />
-                    <Route path="users" element={<ListQuiz />} />
+                    <Route path="users" element={
+                        <PrivateRoute>
+                            <ListQuiz />
+                        </PrivateRoute>
+                    } 
+                    />
                 </Route>
                 <Route path="/quiz/:id" element={<DetailQuiz />} />
-                <Route path="/admins" element={<Admin />}>
+                <Route path="/admins" element={
+                    <PrivateRoute>
+                      <Admin />
+                    </PrivateRoute>    
+                }>
                     <Route index element={<DashBoard />} />
                     <Route path="manage-users" element={<ManageUser />} />
                     <Route path="manage-quizzes" element={<ManageQuiz />} />
@@ -66,7 +78,7 @@ const Layout = (props) => {
                 pauseOnHover
                 theme="light"
             />
-        </>
+        </Suspense>
     )
 }
 export default Layout
